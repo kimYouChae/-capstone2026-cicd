@@ -7,7 +7,12 @@
 #RUN npm run build
 
 # 2. 실행 단계: 빌드된 파일만 Nginx로 복사하여 실행
+#FROM nginx:stable-alpine
+#COPY --from=build /app/build /usr/share/nginx/html
+#EXPOSE 80
+#CMD ["nginx", "-g", "daemon off;"]
+
 FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
+COPY public/ /usr/share/nginx/html/
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
